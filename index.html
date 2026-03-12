@@ -121,8 +121,8 @@
             width: 30,
             height: 24,
             velocity: 0,
-            gravity: 0.12,
-            jumpStrength: -4.5,
+            gravity: 0.02,
+            jumpStrength: -1.5,
             rotation: 0,
             draw: function() {
                 ctx.save();
@@ -256,8 +256,8 @@
         const pipes = {
             items: [],
             width: 50,
-            gap: 110,
-            dx: 2.5,
+            gap: 150,
+            dx: 0.5,
             draw: function() {
                 for (let i = 0; i < this.items.length; i++) {
                     const p = this.items[i];
@@ -278,12 +278,13 @@
                 }
             },
             update: function() {
-                if (frames % 100 === 0) {
-                    const topHeight = Math.random() * (canvas.height - 200) + 50;
+                if (frames % 250 === 0) {
+                    const topHeight = Math.random() * (canvas.height - this.gap - 100) + 50;
+                    const bottomHeight = canvas.height - this.gap - topHeight;
                     this.items.push({
                         x: canvas.width,
                         top: topHeight,
-                        bottom: canvas.height - this.gap - topHeight
+                        bottom: bottomHeight
                     });
                 }
                 
@@ -337,7 +338,7 @@
                 
                 ctx.fillStyle = '#cbb968';
                 for (let i = 0; i < canvas.width; i += 20) {
-                    ctx.fillRect(i - (frames * 2) % 20, canvas.height - 20, 10, 20);
+                    ctx.fillRect(i - (frames * 1) % 20, canvas.height - 20, 10, 20);
                 }
             },
             draw: function() {
